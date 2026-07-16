@@ -1,0 +1,148 @@
+body{
+   background: linear-gradient(to top, #bbf7d0, #f0fdf4)
+}
+.checkout-container {
+  
+  width: 92%;
+  margin: 40px auto;
+  display: flex;
+  gap: 35px;
+}
+
+/* LEFT SIDE */
+.checkout-left {
+  flex: 2;
+}
+
+/* PRODUCT CARD */
+.product-card-new {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* FLEX */
+.product-flex-new {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+/* IMAGE */
+.product-image-new {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #f3f4f6;
+  padding: 10px;
+}
+
+/* DETAILS */
+.product-details-new h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.price-new {
+  font-size: 22px;
+  color: #16a34a;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-details-new p {
+  font-size: 17px;
+  color: #555;
+  margin: 6px 0;
+}
+
+/* RIGHT SIDE */
+.checkout-right {
+  flex: 1;
+}
+
+/* PRICE CARD */
+.price-card-new {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.price-title-new {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+/* ROW */
+.price-row-new {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
+  font-size: 17px;
+}
+
+/* FREE TEXT */
+.free-new {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+/* TOTAL */
+.total-final-new {
+  font-size: 20px;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* BUTTON */
+.btn-checkout-new {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right,#22c55e,#16a34a);
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-checkout-new:hover {
+  transform: translateY(-2px);
+}
+
+/* ADDRESS BUTTON */
+.btn-address-new {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 2px solid #22c55e;
+  background: white;
+  color: #16a34a;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-address-new:hover {
+  background: #22c55e;
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+
+  .product-flex-new {
+    flex-direction: column;
+    text-align: center;
+  }
+}

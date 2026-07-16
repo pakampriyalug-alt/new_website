@@ -1,0 +1,290 @@
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  background:linear-gradient(to top,#f0f3f1,#f0fdf4);
+  color:#1f2937;
+  overflow-x:hidden;
+}
+
+/* HEADER */
+.headerbox{
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  width:100%;
+  padding:10px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+
+  background:linear-gradient(to bottom,#72eb9c,#b7f0cb,#f0fdf4);
+  border-bottom:1px solid #aff1c6;
+}
+
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:26px;
+  font-weight:700;
+}
+
+.logo-circle{
+  background:#1fa64a;
+  color:white;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo-text{
+  color:#16863b;
+}
+
+/* SEARCH */
+.searchbox{
+  flex:1;
+  max-width:420px;
+  position:relative;
+}
+
+.searchbox input{
+  width:100%;
+  height:42px;
+  padding:0 15px 0 38px;
+  border-radius:10px;
+  border:1px solid #bbf7d0;
+  background:white;
+  font-size:14px;
+  outline:none;
+}
+
+.search-icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#22c55e;
+}
+
+/* NAVIGATION */
+.boxlist{
+  display:flex;
+  list-style:none;
+  gap:12px;
+}
+
+.boxullist a{
+  text-decoration:none;
+  color:#16863b;
+  font-weight:600;
+  padding:6px 10px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.boxullist a:hover{
+  background:#cff3e1;
+}
+
+/* ICON AREA */
+.actions{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* WISHLIST */
+.wishlist i{
+  font-size:20px;
+  color:#ef4444;
+  cursor:pointer;
+}
+
+/* CART */
+.cart i{
+  font-size:20px;
+  color:#16863b;
+  cursor:pointer;
+}
+
+/* CART BADGE */
+.cart-badge2{
+  position:relative;
+  top:-12px;
+  right:8px;
+  background:#ef4444;
+  color:white;
+  border-radius:50%;
+  padding:2px 6px;
+  font-size:11px;
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:20px;
+}
+
+.profile:hover{
+  background:#dcfce7;
+}
+
+.usericon{
+  font-size:24px;
+  color:#15803d;
+}
+
+.username{
+  font-weight:600;
+  font-size:14px;
+  color:#14532d;
+}
+
+/* PROFILE DROPDOWN */
+.profile-dropdown{
+  position:absolute;
+  top:60px;
+  right:10px;
+  width:170px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  overflow:hidden;
+}
+
+.dropdown-item{
+  display:block;
+  padding:10px;
+  text-decoration:none;
+  color:#333;
+  font-size:14px;
+}
+
+.dropdown-item:hover{
+  background:#f0fdf4;
+  color:#16a34a;
+}
+
+.logout{
+  color:red;
+}
+
+/* BUTTON */
+.actions button{
+  background:linear-gradient(90deg,#1fa64a,#16863b);
+  color:white;
+  border:none;
+  padding:7px 16px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* ===================== */
+/* MOBILE RESPONSIVE */
+/* ===================== */
+
+@media(max-width:768px){
+
+.headerbox{
+  flex-wrap:wrap;
+  padding:10px;
+}
+
+.logo{
+  font-size:22px;
+}
+
+.logo-circle{
+  width:38px;
+  height:38px;
+}
+
+.searchbox{
+  order:3;
+  width:100%;
+  max-width:100%;
+}
+
+.searchbox input{
+  height:40px;
+}
+
+.boxlist{
+  width:100%;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.actions{
+  gap:12px;
+}
+
+/* hide username on mobile */
+.username{
+  display:none;
+}
+
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: #2563eb;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropdown-btn:hover {
+  background: #1d4ed8;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 150px;
+  z-index: 100;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background: #f3f4f6;
+}

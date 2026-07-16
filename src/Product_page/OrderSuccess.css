@@ -1,0 +1,73 @@
+body{
+   background: linear-gradient(to top, #bbf7d0, #f0fdf4)
+}
+.success-container {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f6fa;
+}
+
+.success-card {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: #4CAF50;
+  color: white;
+  font-size: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+}
+
+.success-card h2 {
+  margin-bottom: 15px;
+}
+
+.success-card p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.success-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.home-btn {
+  padding: 10px 20px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.orders-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  background: #333;
+}
+
+.orders-btn:hover {
+  background: #43a047;
+}

@@ -1,0 +1,178 @@
+/* AboutBody.css */
+
+.about-body {
+  padding: 60px 8%;
+ background: linear-gradient(to top, #bbf7d0, #f0fdf4);
+
+}
+
+/* Top Section */
+.about-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.about-text h1 {
+  font-size: 38px;
+  color: #166534;
+
+  margin-bottom: 10px;
+}
+
+.about-text h3 {
+  color: #16a34a;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.mission-icon {
+  font-size: 35px;
+  color: #16a34a;
+  margin-bottom: 15px;
+}
+/* Mission Section */
+.mission-section {
+  padding: 60px 8%;
+  background: linear-gradient(to top, #bbf7d0,#6ceb98, #f0fdf4);
+  text-align: center;
+
+}
+
+.mission-title {
+  font-size: 34px;
+  color: #166534;
+  margin-bottom: 40px;
+}
+
+/* Box Container */
+.mission-box-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Single Box */
+.mission-box {
+ background: linear-gradient(to top, #bbf7d0, #f0fdf4);
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+}
+
+.mission-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(22,163,74,0.2);
+}
+
+/* Icon */
+.mission-icon {
+  font-size: 38px;
+  color: #16a34a;
+  margin-bottom: 15px;
+}
+
+/* Text */
+.mission-box h3 {
+  color: #14532d;
+  margin-bottom: 10px;
+}
+
+.mission-box p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mission-box-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Cards */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.about-card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+}
+
+.about-card h4 {
+  color: #15803d;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  color: #555;
+}
+
+/* Story */
+.about-story {
+  margin-top: 30px;
+  text-align: left;
+  max-width: 700px;
+  margin-right: 200px;
+  
+  
+
+}
+
+.about-story h2 {
+  color: #166534;
+  margin-bottom: 15px;
+}
+
+.about-story p {
+  color: #555;
+  line-height: 1.7;
+}
+.aboutusbtn{
+  width: 200px;
+  height: 50px;
+  background-color: #15803d;
+  color: white;
+  
+  border-radius: 15px;
+  border: none;
+  font-size: 20px;
+  
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-top {
+    grid-template-columns: 1fr;
+  }
+
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+}
