@@ -9,17 +9,18 @@ function Sellerdetails(){
   const [showForm, setShowForm] = useState(false);
     const [selectedSellerId, setSelectedSellerId] = useState(null);
        const [registers, setRegisters] = useState([]);
-         const getRegisters = async () => {
-           try {
-             const res = await axios.get("http://localhost:4000/viewallseller");
-             setRegisters(res.data);
-             console.log(res.data);
-           } catch (err) {
-             console.log(err);
-           }
-         };
+         
        
          useEffect(() => {
+           const getRegisters = async () => {
+             try {
+               const res = await axios.get("http://localhost:4000/viewallseller");
+               setRegisters(res.data);
+               console.log(res.data);
+             } catch (err) {
+               console.log(err);
+             }
+           };
            getRegisters();
          }, []);
           const clearForm = () => {
@@ -45,7 +46,8 @@ const handleUpdateStatus = async () => {
       status: Status
     });
 
-    await getRegisters(); // ✅ refresh table
+    const res = await axios.get("http://localhost:4000/viewallseller");
+    setRegisters(res.data);
     handleCancel();
 
   } catch (error) {
@@ -55,7 +57,8 @@ const handleUpdateStatus = async () => {
            const deleteRegister = async (id) => {
              if (window.confirm("Are you sure?")) {
                await axios.delete(`http://localhost:4000/deleteseller/${id}`);
-               getRegisters();
+               const res = await axios.get("http://localhost:4000/viewallseller");
+               setRegisters(res.data);
              }
            };
     return(

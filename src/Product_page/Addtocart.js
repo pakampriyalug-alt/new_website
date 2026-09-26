@@ -2,7 +2,7 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 import "./Addtocart.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Categorybar from "./Categorybar";
@@ -17,6 +17,18 @@ const [wishlistIds, setWishlistIds] = useState([]);
 
 
 
+const getProducts = useCallback(async () => {
+  if (!user) return;
+
+  try {
+    const res = await axios.get(`http://localhost:4000/getaddtocart/${user._id}`);
+    setProducts(res.data);
+    localStorage.setItem("carts", JSON.stringify(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+}, [user]);
+
 useEffect(() => {
   if (!user) {
     navigate("/login");
@@ -24,7 +36,7 @@ useEffect(() => {
   }
 
   getProducts();
-}, []);
+}, [user, navigate, getProducts]);
 
 const addTowish = async (product) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -89,24 +101,13 @@ const removeFromWish = async (product) => {
     console.log("Remove error:", err);
   }
 };
- const totalAmount = products.reduce((total, item) => {
-            return total + (item.price * item.quantity);
-            }, 0);
-localStorage.setItem("totalamount",totalAmount);
-const getProducts = async () => {
-  try {
-    const res = await axios.get(
-      `http://localhost:4000/getaddtocart/${user._id}` 
-    );
+   const totalAmount = products.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
 
-    console.log("API DATA:", res.data); 
-    setProducts(res.data);
-    localStorage.setItem("carts",JSON.stringify(res.data));
-  } catch (err) {
-    console.log(err);
-  }
-};
-
+  useEffect(() => {
+    localStorage.setItem("totalamount", totalAmount.toString());
+  }, [totalAmount]);
 
   const deleteAddtocart = async (id) => {
     if (window.confirm("Are you sure?")) {

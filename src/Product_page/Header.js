@@ -44,63 +44,48 @@ function Header() {
   }
 };
 
- const getcount = async () => {
-  // const userData = localStorage.getItem("user");
-
-  // const user =
-  //   userData && userData !== "undefined"
-  //     ? JSON.parse(userData)
-  //     : null;
- const user = getUserFromStorage();
-  if (!user) {
-    setCount(0);
-    return;
-  }
-
-  try {
-    const res = await axios.get(
-      `http://localhost:4000/cartcount/${user._id}`
-    );
-
-    setCount(res.data.count);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
   useEffect(() => {
+    const getcount = async () => {
+      const user = getUserFromStorage();
+      if (!user) {
+        setCount(0);
+        return;
+      }
+
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/cartcount/${user._id}`
+        );
+        setCount(res.data.count);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getcount();
   }, []);
   const [wishlistcount, setWishlistcount] = useState(0);
 
-const getwishlistcount = async () => {
-  // const userData = localStorage.getItem("user");
+  useEffect(() => {
+    const getwishlistcount = async () => {
+      const user = getUserFromStorage();
 
-  // const user =
-  //   userData && userData !== "undefined"
-  //     ? JSON.parse(userData)
-  //     : null;
-   const user = getUserFromStorage();
+      if (!user) {
+        setWishlistcount(0);
+        return;
+      }
 
-  if (!user) {
-    setWishlistcount(0);
-    return;
-  }
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/wishcount/${user._id}`
+        );
 
-  try {
-    const res = await axios.get(
-      `http://localhost:4000/wishcount/${user._id}`
-    );
-
-    setWishlistcount(res.data.count);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-useEffect(() => {
-  getwishlistcount();
-}, []);
+        setWishlistcount(res.data.count);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getwishlistcount();
+  }, []);
   const [data, setData] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
 

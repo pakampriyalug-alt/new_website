@@ -1,14 +1,14 @@
 import "./Dashboard.css";
 
 import axios from "axios";
-import img from "./download (1).jfif";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function SellerOrder() {
-  const [sOpen, setSopen] = useState(false);
+  const [sOpen, setSOpen] = useState(false);
   const toggleseller = () => {
-    setSopen(!sOpen);
+    setSOpen(!sOpen);
   };
   const sellerData = localStorage.getItem("seller");
 
@@ -27,27 +27,25 @@ function SellerOrder() {
   const seller = JSON.parse(localStorage.getItem("seller"));
 
   useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        console.log("Seller ID:", seller._id);
+
+        const res = await axios.get(
+          `http://localhost:4000/api/order/seller/${seller._id}`
+        );
+
+        console.log("Orders:", res.data.orders);
+
+        setOrders(res.data.orders || []);
+      } catch (error) {
+        console.log("Fetch Error:", error);
+      }
+    };
     if (seller?._id) {
       fetchOrders();
     }
   }, [seller?._id]);
-
-  // ✅ FETCH ORDERS
-  const fetchOrders = async () => {
-    try {
-      console.log("Seller ID:", seller._id);
-
-      const res = await axios.get(
-        `http://localhost:4000/api/order/seller/${seller._id}`
-      );
-
-      console.log("Orders:", res.data.orders);
-
-      setOrders(res.data.orders || []);
-    } catch (error) {
-      console.log("Fetch Error:", error);
-    }
-  };
 
   // ✅ OPEN UPDATE FORM
   const handleEditClick = (orderId, productId, currentStatus) => {
@@ -79,7 +77,12 @@ function SellerOrder() {
 
       alert("Status Updated ");
 
-      fetchOrders();
+      if (seller?._id) {
+        const res = await axios.get(
+          `http://localhost:4000/api/order/seller/${seller._id}`
+        );
+        setOrders(res.data.orders || []);
+      }
       setShowForm(false);
 
     } catch (error) {

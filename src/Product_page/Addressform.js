@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Buynow.css";
 import "./Header.css";
 import img from "./wwww.png";
@@ -8,8 +8,6 @@ import Header from "./Header";
 
 function Addressform() {
   const navigate = useNavigate();
-
-const{id}=useParams();
 
   const [formData, setFormData] = useState({
     fullName: "",

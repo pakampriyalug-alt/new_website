@@ -2,22 +2,23 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Categorybar from "./Categorybar";
 
 
 
 function Shoes() {
-    const [products, setProducts] = useState([]);
-    const getProducts = async () => {
-      const res = await axios.get("http://localhost:4000/viewproduct");
-      setProducts(res.data);
-    };
-  
-    useEffect(() => {
-      getProducts();
-    }, []);
+  const [products, setProducts] = useState([]);
+
+  const getProducts = useCallback(async () => {
+    const res = await axios.get("http://localhost:4000/viewproduct");
+    setProducts(res.data);
+  }, []);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
   return (
     <>
       <Header />

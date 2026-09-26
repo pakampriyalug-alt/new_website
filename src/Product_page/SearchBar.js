@@ -10,6 +10,16 @@ const SearchBar = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (query.trim()) {
+        const fetchResults = async () => {
+          try {
+            const res = await axios.get(
+              `http://localhost:4000/search?q=${query}`
+            );
+            setResults(res.data);
+          } catch (error) {
+            console.error(error);
+          }
+        };
         fetchResults();
       } else {
         setResults([]);
@@ -19,16 +29,7 @@ const SearchBar = () => {
     return () => clearTimeout(delay);
   }, [query]);
 
-  const fetchResults = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/search?q=${query}`
-      );
-      setResults(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   return (
     <div className="searchbox">

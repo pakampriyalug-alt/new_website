@@ -2,10 +2,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import img from "./girl.jfif";
 import { Link } from "react-router-dom";
 import "./Header.css";
-
+import img from "./girl.jfif";
 function Header() {
   const navigate=useNavigate();
     const [isOpen, setIsOpen] = useState(false);
@@ -21,62 +20,64 @@ const loginuser =
     : null;
    const [count, setCount] = useState(0);
 
-  const getcount = async () => {
+  useEffect(() => {
+    const getcount = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+    
+      if (!user) {
+        setCount(0);
+        return;
+      }
+
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/cartcount/${user._id}`
+        );
+
+        setCount(res.data.count); 
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getcount();
+  }, []);
+  const [wishlistcount, setWishlistcount] = useState(0);
+
+useEffect(() => {
+  const getwishlistcount = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-  
     if (!user) {
-      setCount(0);
+      setWishlistcount(0);
       return;
     }
 
     try {
       const res = await axios.get(
-        `http://localhost:4000/cartcount/${user._id}`
+        `http://localhost:4000/wishcount/${user._id}`
       );
 
-      setCount(res.data.count); 
+      setWishlistcount(res.data.count);
     } catch (err) {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    getcount();
-  }, []);
-  const [wishlistcount, setWishlistcount] = useState(0);
-
-const getwishlistcount = async () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user) {
-    setWishlistcount(0);
-    return;
-  }
-
-  try {
-    const res = await axios.get(
-      `http://localhost:4000/wishcount/${user._id}`
-    );
-
-    setWishlistcount(res.data.count);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-
-useEffect(() => {
   getwishlistcount();
 }, []);
   const [data, setData] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/viewuser")
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/viewuser");
+        setData(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
   }, []);
 
   

@@ -51,6 +51,7 @@ function AdminLogin() {
             <input
             name="email"
             placeholder="Email"
+            value={form.email}
             onChange={handleChange}
           />
     
@@ -58,6 +59,7 @@ function AdminLogin() {
             name="password"
             placeholder="Password"
             type="password"
+            value={form.password}
             onChange={handleChange}
           />
     
@@ -69,27 +71,6 @@ function AdminLogin() {
         </div>
         
         </> 
-    // <div style={{ textAlign: "center" }}>
-    //   <h2>Admin Login</h2>
-
-    //   <form onSubmit={handleLogin}>
-    //     <input
-    //       type="email"
-    //       name="email"
-    //       placeholder="Enter email"
-    //       onChange={handleChange}
-    //     /><br /><br />
-
-    //     <input
-    //       type="password"
-    //       name="password"
-    //       placeholder="Enter password"
-    //       onChange={handleChange}
-    //     /><br /><br />
-
-    //     <button type="submit">Login</button>
-    //   </form>
-    // </div>
   );
 }
 

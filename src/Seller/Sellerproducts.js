@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import img from "./download (1).jfif";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Sellerproducts() {
   
   const navigate=useNavigate();
-    const [sOpen, setSopen] = useState(false);
+    const [sOpen, setSOpen] = useState(false);
   const subCategoryOptions = { Women: ["Saree", "Kurti", "Tops"], Men: ["Shirt", "Tshirt", "Jeans"], kids: ["Frock", "Shorts"], Accessories: ["Watch", "Belt", "Bag"], Footware: ["Shoes", "Sandals", "Slippers"] };
   const [showForm, setShowForm] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -28,7 +28,7 @@ function Sellerproducts() {
   const [editId, setEditId] = useState(null);
 
   const toggleseller = () => {
-    setSopen(!sOpen);
+    setSOpen(!sOpen);
   };
   const sellerData = localStorage.getItem("seller");
 
@@ -37,16 +37,16 @@ function Sellerproducts() {
       ? JSON.parse(sellerData)
       : null;
   const sellerId = loginseller?._id;
-  const getProducts = async () => {
-     const seller = JSON.parse(localStorage.getItem("seller"));
-
-  const res = await axios.get(
-    `http://localhost:4000/viewsellerproduct?sellerId=${seller._id}`
-  );
-    setProducts(res.data);
-  };
-
+  
   useEffect(() => {
+    const getProducts = async () => {
+      const seller = JSON.parse(localStorage.getItem("seller"));
+
+      const res = await axios.get(
+        `http://localhost:4000/viewsellerproduct?sellerId=${seller._id}`
+      );
+      setProducts(res.data);
+    };
     getProducts();
   }, []);
 
@@ -86,7 +86,10 @@ const seller = JSON.parse(localStorage.getItem("seller"));
     await axios.post("http://localhost:4000/addsellerproduct", formData);
     clearForm();
     setShowForm(false);
-    getProducts();
+    const updatedProducts = await axios.get(
+      `http://localhost:4000/viewsellerproduct?sellerId=${sellerId}`
+    );
+    setProducts(updatedProducts.data);
   };
 
   const handleEdit = (item) => {
@@ -129,13 +132,19 @@ const seller = JSON.parse(localStorage.getItem("seller"));
     clearForm();
     setShowForm(false);
     setIsEdit(false);
-    getProducts();
+    const updatedProducts = await axios.get(
+      `http://localhost:4000/viewsellerproduct?sellerId=${sellerId}`
+    );
+    setProducts(updatedProducts.data);
   };
 
   const deleteProduct = async (id) => {
       if (window.confirm("Are you sure?")) {
     await axios.delete(`http://localhost:4000/deletesellerproduct/${id}`);
-    getProducts();
+    const updatedProducts = await axios.get(
+      `http://localhost:4000/viewsellerproduct?sellerId=${sellerId}`
+    );
+    setProducts(updatedProducts.data);
       }
   };
    const handleCancel = () => {
@@ -319,7 +328,7 @@ const seller = JSON.parse(localStorage.getItem("seller"));
             <tbody>
               {products.map(p => (
                 <tr key={p._id}>
-                  <td><img src={`http://localhost:4000/uploads/${p.image}`} width="30" /></td>
+                  <td><img src={`http://localhost:4000/uploads/${p.image}`} width="30"  alt="img"/></td>
                   <td>{p._id.slice(-4)}</td>
                   <td className="productname">{p.Product}</td>
                   <td >{p.Category}</td>

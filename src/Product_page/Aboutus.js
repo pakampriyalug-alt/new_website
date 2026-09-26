@@ -1,9 +1,6 @@
 import "./Aboutus.css";
-import heroImg from "./photo1.avif";
 import aboutImg from "./photo1.avif";
-import aboutImg2 from "./office img1.webp";
 import Header from "./Header";
-import "./Homepage.css";
 import Categorybar from "./Categorybar";
 function Aboutus() {
   return (
@@ -90,22 +87,22 @@ function Aboutus() {
   <div className="footer-section">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/aboutus">About</a></li>
+      <li><a href="/products">Products</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/login">Login</a></li>
     </ul>
   </div>
 
   <div className="footer-section">
     <h3>Customer Service</h3>
     <ul>
-      <li><a href="#">Help & Support</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Return Policy</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="/help">Help & Support</a></li>
+      <li><a href="/shipping">Shipping Info</a></li>
+      <li><a href="/returns">Return Policy</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms & Conditions</a></li>
     </ul>
   </div>
 

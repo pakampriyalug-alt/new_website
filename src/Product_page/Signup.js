@@ -1,67 +1,17 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import img from "./photo1.avif";
-
-import Header from "./Header";
 function Signup() {
-
-
-const divstyle = {
-          backgroundImage: `url(${img})`,
-          backgroundSize: "cover",
-          width: "350px",
-    
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          height:"400px",
-  
-      };
-      const divstyle1 = {
-          backgroundImage: `url(${img})`,
-          backgroundSize: "cover",
-          width: "100%",
-        
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          height:"700px",
-  
-      };
-  const navigate = useNavigate();
- 
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: ""
-  // });
-
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.tar get.name]: e.target.value
-  //   });
-  // };
-
-  // const handleSignup = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-
-  //     await axios.post(
-  //       "http://localhost:4000/api/auth/signup",
-  //       formData
-  //     );
-
-  //     alert("Signup Success");
-
-  //     navigate("/login");
-
-  //   } catch (error) {
-  //     alert("Signup Failed");
-  //   }
- 
+  const divstyle1 = {
+    backgroundImage: `url(${img})`,
+    backgroundSize: "cover",
+    width: "100%",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    height: "700px",
+  };
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -116,49 +66,51 @@ const divstyle = {
 
   return (
     <>
-    <Header/>
-    <div className="auth-container" style={divstyle1} >
-
-      <form className="auth-card" onSubmit={(e)=>{
-  e.preventDefault();
-  register()}}>
+    <div className="auth-container" style={divstyle1}>
+      <form className="auth-card" onSubmit={(e) => {
+        e.preventDefault();
+        register();
+      }}>
        <div className="para">
-        {/* <h5>User</h5> */}
         <Link to="">User</Link>
-      <Link to="./quicksignup" >Seller</Link>
+        <Link to="./quicksignup">Seller</Link>
         </div>
         <h2> User Signup</h2>
 
-         <input
-        name="name"
-        placeholder="Name"
-        onChange={handleChange}
-      />
+        <input
+          name="name"
+          placeholder="Name"
+          value={user.name}
+          onChange={handleChange}
+        />
 
-      <input
-        name="email"
-        placeholder="Email"
-        onChange={handleChange}
-      />
+        <input
+          name="email"
+          placeholder="Email"
+          value={user.email}
+          onChange={handleChange}
+        />
 
-      <input
-        name="password"
-        placeholder="Password"
-        type="password"
-        onChange={handleChange}
-      />
-      <input
-        name="mobile"
-        placeholder="mobile"
-        type="mobile"
-        onChange={handleChange}
-      />
-      <textarea
-        name="address"
-        placeholder="address"
-        type="address"
-        onChange={handleChange}
-      />
+        <input
+          name="password"
+          placeholder="Password"
+          type="password"
+          value={user.password}
+          onChange={handleChange}
+        />
+        <input
+          name="mobile"
+          placeholder="mobile"
+          type="tel"
+          value={user.mobile}
+          onChange={handleChange}
+        />
+        <textarea
+          name="address"
+          placeholder="address"
+          value={user.address}
+          onChange={handleChange}
+        />
       
 
             <label>Gender</label>
@@ -172,12 +124,11 @@ const divstyle = {
               <span>male</span>
             </label>
 
-            {/* COD */}
-            <label >
+            <label>
               <input
                 type="radio"
                 name="gender"
-                value="Female"
+                value="female"
                 onChange={handleChange}
               />
               <span>female</span>

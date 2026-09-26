@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import img from "./girl.jfif";
+
 import { Link } from "react-router-dom";
 import "./Header.css";
 function Categorybar(){
@@ -20,54 +20,50 @@ function Categorybar(){
          : null;
         const [count, setCount] = useState(0);
      
-       const getcount = async () => {
-         const user = JSON.parse(localStorage.getItem("user"));
-     
-       
-         if (!user) {
-           setCount(0);
-           return;
-         }
-     
-         try {
-           const res = await axios.get(
-             `http://localhost:4000/cartcount/${user._id}`
-           );
-     
-           setCount(res.data.count); 
-         } catch (err) {
-           console.log(err);
-         }
-       };
-     
        useEffect(() => {
+         const getcount = async () => {
+           const user = JSON.parse(localStorage.getItem("user"));
+       
+           if (!user) {
+             setCount(0);
+             return;
+           }
+       
+           try {
+             const res = await axios.get(
+               `http://localhost:4000/cartcount/${user._id}`
+             );
+       
+             setCount(res.data.count); 
+           } catch (err) {
+             console.log(err);
+           }
+         };
          getcount();
        }, []);
        const [wishlistcount, setWishlistcount] = useState(0);
      
-     const getwishlistcount = async () => {
-       const user = JSON.parse(localStorage.getItem("user"));
-     
-       if (!user) {
-         setWishlistcount(0);
-         return;
-       }
-     
-       try {
-         const res = await axios.get(
-           `http://localhost:4000/wishcount/${user._id}`
-         );
-     
-         setWishlistcount(res.data.count);
-       } catch (err) {
-         console.log(err);
-       }
-     };
-     
-     // ✅ run on load
-     useEffect(() => {
-       getwishlistcount();
-     }, []);
+       useEffect(() => {
+         const getwishlistcount = async () => {
+           const user = JSON.parse(localStorage.getItem("user"));
+       
+           if (!user) {
+             setWishlistcount(0);
+             return;
+           }
+       
+           try {
+             const res = await axios.get(
+               `http://localhost:4000/wishcount/${user._id}`
+             );
+       
+             setWishlistcount(res.data.count);
+           } catch (err) {
+             console.log(err);
+           }
+         };
+         getwishlistcount();
+       }, []);
        const [data, setData] = useState([]);
        const [openCategory, setOpenCategory] = useState(null);
      

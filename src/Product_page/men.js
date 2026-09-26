@@ -2,34 +2,33 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Categorybar from "./Categorybar";
 
 
 function Men({getwishlistcount}) {
- useEffect(() => {
-    fetchWishlist();
-  }, []);
-  
-  const fetchWishlist = async () => {
+  const [wishlistIds, setWishlistIds] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const fetchWishlist = useCallback(async () => {
     const user = JSON.parse(localStorage.getItem("user"));
-  
+
     if (!user) return;
-  
+
     try {
       const res = await axios.get("http://localhost:4000/getwishlist", {
-        params: { userId: user._id }
+        params: { userId: user._id },
       });
-  
-  const ids = res.data.map(item => item.productId._id.toString());
-  setWishlistIds(ids);
-  
+
+      const ids = res.data.map((item) => item.productId._id.toString());
+      setWishlistIds(ids);
     } catch (err) {
       console.log("Fetch wishlist error:", err);
     }
-  };
-    const [wishlistIds, setWishlistIds] = useState([]);
+  }, []);
 const addTowish = async (product) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -80,28 +79,26 @@ const removeFromWish = async (product) => {
   }
 };
 
-   const [products, setProducts] = useState([]);
-   const [filteredProducts, setFilteredProducts] = useState([]);
-      const [selectedCategory, setSelectedCategory] = useState("All");
-  const getProducts = async () => {
-     try {
+  const getProducts = useCallback(async () => {
+    try {
+      const adminProducts = await axios.get("http://localhost:4000/viewproduct");
+      const sellerProducts = await axios.get("http://localhost:4000/sellerallproduct");
+
+      const mergedProducts = [...adminProducts.data, ...sellerProducts.data];
+      setProducts(mergedProducts);
+      setFilteredProducts(mergedProducts);
+    } catch (err) {
+      console.log("Product fetch error", err);
+    }
+  }, []);
  
-       const adminProducts = await axios.get("http://localhost:4000/viewproduct");
-       const sellerProducts = await axios.get("http://localhost:4000/sellerallproduct");
- 
-       const mergedProducts = [...adminProducts.data, ...sellerProducts.data];
-         console.log("adminproduct",adminProducts.data);
-       setProducts(mergedProducts);
-       setFilteredProducts(mergedProducts);
- 
-     } catch (err) {
-       console.log("Product fetch error", err);
-     }
-   };
- 
-   useEffect(() => {
-     getProducts();
-   }, []);
+  useEffect(() => {
+    fetchWishlist();
+  }, [fetchWishlist]);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
 
       const filterByCategory = (cat) => {
       setSelectedCategory(cat);
@@ -224,25 +221,25 @@ const removeFromWish = async (product) => {
     </p>
   </div>
 
-  <div className="footer-section">
+ <div className="footer-section">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="home">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="product">Products</a></li>
+      <li><a href="contc">Contact</a></li>
+      <li><a href="login">Login</a></li>
     </ul>
   </div>
 
   <div className="footer-section">
     <h3>Customer Service</h3>
     <ul>
-      <li><a href="#">Help & Support</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Return Policy</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="help">Help & Support</a></li>
+      <li><a href="shipping">Shipping Info</a></li>
+      <li><a href="reurn">Return Policy</a></li>
+      <li><a href="privacy">Privacy Policy</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
     </ul>
   </div>
 

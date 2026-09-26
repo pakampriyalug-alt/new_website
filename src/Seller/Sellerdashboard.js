@@ -1,6 +1,4 @@
-import img from "./download (1).jfif";
-import img2 from "./images.jfif";
-import img3 from "./images (1).png";
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -50,13 +48,16 @@ function Sellerdashboard() {
 useEffect(() => {
   if (!seller?._id) return;
 
-  axios
-    .get(`http://localhost:4000/api/order/sale/sellerproduct-consales/${seller._id}`)
-    .then((res) => {
+  const fetchChartData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:4000/api/order/sale/sellerproduct-consales/${seller._id}`);
       console.log("Graph Data:", res.data); 
       setChartData(res.data);
-    })
-    .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  fetchChartData();
 
 }, [seller?._id]);
  
@@ -79,7 +80,7 @@ useEffect(() => {
 
 
 
-  const [sOpen, setSopen] = useState(false);
+  const [sOpen, setSOpen] = useState(false);
 
   const [data, setData] = useState({
     products: 0,
@@ -89,7 +90,7 @@ useEffect(() => {
   });
 
   const toggleseller = () => {
-    setSopen(!sOpen);
+    setSOpen(!sOpen);
   };
   const sellerData = localStorage.getItem("seller");
 
@@ -100,17 +101,20 @@ useEffect(() => {
   const sellerId = loginseller?._id;
 
   useEffect(() => {
-    const sellerData = JSON.parse(localStorage.getItem("seller") || "{}");
-    const sellerId = sellerData._id;
-    console.log(sellerId);
-    if (!sellerId) return;
+    const fetchDashboard = async () => {
+      const sellerData = JSON.parse(localStorage.getItem("seller") || "{}");
+      const sellerId = sellerData._id;
+      console.log(sellerId);
+      if (!sellerId) return;
 
-    axios
-      .get(`http://localhost:4000/getsellerdashboard/${sellerId}`)
-      .then((res) => {
+      try {
+        const res = await axios.get(`http://localhost:4000/getsellerdashboard/${sellerId}`);
         setData(res.data);
-      })
-      .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchDashboard();
   }, []);
  
 

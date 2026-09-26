@@ -242,7 +242,7 @@ const productKeys =
           </li>
            <li>
             <Link to="/sellerdetails" className="link">
-             <i class="fa-solid fa-users"></i> Seller Details
+             <i className="fa-solid fa-users"></i> Seller Details
             </Link>
           </li>
           <li>
@@ -301,25 +301,25 @@ const productKeys =
   <div className="cardadmin purple">
     <h4>Total Sales</h4>
     <h2>₹{data.totalsale}</h2>
-    <i class="fa-solid fa-chart-line" style={{marginLeft:"150px",fontSize:"30px",color:"#cbadedff"}}></i> 
+    <i className="fa-solid fa-chart-line" style={{marginLeft:"150px",fontSize:"30px",color:"#cbadedff"}}></i> 
   </div>
 
   <div className="cardadmin blue">
     <h4>Total Customers</h4>
     <h2>{data.users}</h2>
-     <i class="fa-solid fa-users" style={{marginLeft:"150px",fontSize:"30px",color:"#6f9ec1ff"}}></i>
+     <i className="fa-solid fa-users" style={{marginLeft:"150px",fontSize:"30px",color:"#6f9ec1ff"}}></i>
   </div>
 
   <div className="cardadmin orange">
     <h4>Total Products</h4>
     <h2>{data.products}</h2>
-  <i class="fa-solid fa-boxes-stacked"style={{marginLeft:"150px",fontSize:"30px",color:"#e7c49cff"}}></i>
+  <i className="fa-solid fa-boxes-stacked" style={{marginLeft:"150px",fontSize:"30px",color:"#e7c49cff"}}></i>
   </div>
 
   <div className="cardadmin green">
     <h4>Total Orders</h4>
     <h2>{data.orders}</h2>
-   <i class="fa-solid fa-clipboard-list"style={{marginLeft:"150px",fontSize:"30px",color:"#d7a3d7ff"}}></i> 
+   <i className="fa-solid fa-clipboard-list" style={{marginLeft:"150px",fontSize:"30px",color:"#d7a3d7ff"}}></i> 
   </div>
 
 </div>

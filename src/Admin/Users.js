@@ -6,23 +6,25 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 function Users(){
        const [registers, setRegisters] = useState([]);
-         const getRegisters = async () => {
-           try {
-             const res = await axios.get("http://localhost:4000/viewallregister");
-             setRegisters(res.data);
-             console.log(res.data);
-           } catch (err) {
-             console.log(err);
-           }
-         };
+         
        
          useEffect(() => {
+           const getRegisters = async () => {
+             try {
+               const res = await axios.get("http://localhost:4000/viewallregister");
+               setRegisters(res.data);
+               console.log(res.data);
+             } catch (err) {
+               console.log(err);
+             }
+           };
            getRegisters();
          }, []);
            const deleteRegister = async (id) => {
              if (window.confirm("Are you sure?")) {
                await axios.delete(`http://localhost:4000/deleteregister/${id}`);
-               getRegisters();
+               const res = await axios.get("http://localhost:4000/viewallregister");
+               setRegisters(res.data);
              }
            };
     return(

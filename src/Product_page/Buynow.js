@@ -4,11 +4,10 @@ import "./Saree.css";
 import "./Buynow.css";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import img from "./wwww.png";
 
 function Buynow() {
- const{id}=useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

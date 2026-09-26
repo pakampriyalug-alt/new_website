@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "./Header";
+
 import "./Userprofile.css";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Sellerprofile() {
 
 
-  const [sOpen, setSopen] = useState(false);
+  const [sOpen, setSOpen] = useState(false);
 
   const [data, setData] = useState({
     products: 0,
@@ -19,7 +18,7 @@ function Sellerprofile() {
   });
 
   const toggleseller = () => {
-    setSopen(!sOpen);
+    setSOpen(!sOpen);
   };
   const sellerData = localStorage.getItem("seller");
 
@@ -30,17 +29,20 @@ function Sellerprofile() {
   const sellerId = loginseller?._id;
 
   useEffect(() => {
-    const sellerData = JSON.parse(localStorage.getItem("seller") || "{}");
-    const sellerId = sellerData._id;
-    console.log(sellerId);
-    if (!sellerId) return;
+    const fetchDashboard = async () => {
+      const sellerData = JSON.parse(localStorage.getItem("seller") || "{}");
+      const sellerId = sellerData._id;
+      console.log(sellerId);
+      if (!sellerId) return;
 
-    axios
-      .get(`http://localhost:4000/getsellerdashboard/${sellerId}`)
-      .then((res) => {
+      try {
+        const res = await axios.get(`http://localhost:4000/getsellerdashboard/${sellerId}`);
         setData(res.data);
-      })
-      .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchDashboard();
   }, []);
   const seller = JSON.parse(localStorage.getItem("seller"));
 
@@ -49,7 +51,6 @@ function Sellerprofile() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
 const navigate=useNavigate();
-const { id } = useParams();
 useEffect(() => {
   const fetchProfile = async () => {
     try {
@@ -75,7 +76,7 @@ useEffect(() => {
   };
 
   fetchProfile();
-}, []);
+}, [navigate]);
 
 // ✅ Prevent crash
 if (!user) {

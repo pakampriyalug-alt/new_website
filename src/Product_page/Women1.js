@@ -1,7 +1,7 @@
 import Header from "./Header";
 import "./Homepage.css";
 import "./frock.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./Saree.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,13 +11,9 @@ import Swal from "sweetalert2";
 
 
 function Women1({ getwishlistcount }) {
+  const [wishlistIds, setWishlistIds] = useState([]);
 
-  const seller = JSON.parse(localStorage.getItem("seller"));
-  useEffect(() => {
-    fetchWishlist();
-  }, []);
-
-  const fetchWishlist = async () => {
+  const fetchWishlist = useCallback(async () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user) return;
@@ -27,14 +23,17 @@ function Women1({ getwishlistcount }) {
         params: { userId: user._id }
       });
 
-      const ids = res.data.map(item => item.productId._id.toString());
+      const ids = res.data.map((item) => item.productId._id.toString());
       setWishlistIds(ids);
 
     } catch (err) {
       console.log("Fetch wishlist error:", err);
     }
-  };
-  const [wishlistIds, setWishlistIds] = useState([]);
+  }, []);
+
+  useEffect(() => {
+    fetchWishlist();
+  }, [fetchWishlist]);
 
   const addTowish = async (product) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -384,22 +383,22 @@ function Women1({ getwishlistcount }) {
         <div className="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="home">Home</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="products">Products</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="login">Login</a></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h3>Customer Service</h3>
           <ul>
-            <li><a href="#">Help & Support</a></li>
-            <li><a href="#">Shipping Info</a></li>
-            <li><a href="#">Return Policy</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="help">Help & Support</a></li>
+            <li><a href="shipping">Shipping Info</a></li>
+            <li><a href="returns">Return Policy</a></li>
+            <li><a href="privacy">Privacy Policy</a></li>
+            <li><a href="terms">Terms & Conditions</a></li>
           </ul>
         </div>
 

@@ -2,13 +2,9 @@ import React from "react";
 import "./OrderSuccess.css";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-function OrderSuccess() {
 
+function OrderSuccess() {
   const navigate = useNavigate();
-//  useEffect(() => {
-//      localStorage.removeItem('carts');
-//    }, []);
   return (
     <>
       <Header />

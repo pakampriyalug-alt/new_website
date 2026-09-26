@@ -1,13 +1,13 @@
 import "./Dashboard.css";
 import "./Homepage.css";
-import img from "./download (1).jfif";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 function Sellercategory() {
   const navigate=useNavigate();
-  const [sOpen,setSopen]=useState(false);
+  const [sOpen,setSOpen]=useState(false);
   const [showForm, setShowForm] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -39,7 +39,7 @@ const sellerId = loginseller?._id;
     }
   };
    const toggleseller =()=>{
-      setSopen(!sOpen);
+      setSOpen(!sOpen);
     };
 
 //   useEffect(() => {
@@ -73,7 +73,7 @@ useEffect(() => {
       alert("Category Added");
       clearForm();
       setShowForm(false);
-      getCategories();
+      getCategories(Sellerid);
     } catch (err) {
       console.log(err);
     }
@@ -108,7 +108,7 @@ useEffect(() => {
       clearForm();
       setShowForm(false);
       setIsEdit(false);
-      getCategories();
+      getCategories(Sellerid);
     } catch (err) {
       console.log(err);
     }
@@ -117,7 +117,7 @@ useEffect(() => {
   const deleteCategory = async (id) => {
     if (window.confirm("Are you sure?")) {
       await axios.delete(`http://localhost:4000/deletecategoryseller/${id}`);
-      getCategories();
+      getCategories(Sellerid);
     }
   };
 

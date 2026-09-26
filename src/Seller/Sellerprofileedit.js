@@ -3,9 +3,8 @@ import "./Auth.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import img from "./photo1.avif";
 
-import Header from "./Header";
+
 
 
 

@@ -2,32 +2,29 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Categorybar from "./Categorybar";
 
 function Short_tops() {
   const [products, setProducts] = useState([]);
-       const getProducts = async () => {
-    try {
 
+  const getProducts = useCallback(async () => {
+    try {
       const adminProducts = await axios.get("http://localhost:4000/viewproduct");
       const sellerProducts = await axios.get("http://localhost:4000/sellerallproduct");
 
       const mergedProducts = [...adminProducts.data, ...sellerProducts.data];
-        console.log("adminproduct",adminProducts.data);
       setProducts(mergedProducts);
-      
-
     } catch (err) {
       console.log("Product fetch error", err);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
   return (
     <>
       <Header />
@@ -45,7 +42,7 @@ function Short_tops() {
                 <div className="product-card" key={p._id}>
               {/* <img src={image5} alt="Silk Saree" /> */}
                <Link to={`/category/Women1/${p._id}`}>
-              <img src={`http://localhost:4000/uploads/${p.image}`} width="40" /></Link>
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" width="40" /></Link>
 
               <h4 className="product-name">
                {p.Product}
@@ -211,28 +208,27 @@ function Short_tops() {
     </p>
   </div>
 
-  <div className="footer-section">
+   <div className="footer-section">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="home">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="product">Products</a></li>
+      <li><a href="contc">Contact</a></li>
+      <li><a href="login">Login</a></li>
     </ul>
   </div>
 
   <div className="footer-section">
     <h3>Customer Service</h3>
     <ul>
-      <li><a href="#">Help & Support</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Return Policy</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="help">Help & Support</a></li>
+      <li><a href="shipping">Shipping Info</a></li>
+      <li><a href="reurn">Return Policy</a></li>
+      <li><a href="privacy">Privacy Policy</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
     </ul>
   </div>
-
   <div className="footer-section">
     <h3>Contact Us</h3>
     <p>Email: ElectroBazaar@electronics.com</p>

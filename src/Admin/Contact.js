@@ -6,23 +6,25 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 function Contact(){
       const [contacts, setContacts] = useState([]);
-              const getContacts = async () => {
-                try {
-                  const res = await axios.get("http://localhost:4000/viewallcontacts");
-                  setContacts(res.data);
-                  console.log(res.data);
-                } catch (err) {
-                  console.log(err);
-                }
-              };
+              
             
               useEffect(() => {
+                const getContacts = async () => {
+                  try {
+                    const res = await axios.get("http://localhost:4000/viewallcontacts");
+                    setContacts(res.data);
+                    console.log(res.data);
+                  } catch (err) {
+                    console.log(err);
+                  }
+                };
                 getContacts();
               }, []);
                const deleteContacts = async (id) => {
                            if (window.confirm("Are you sure?")) {
                              await axios.delete(`http://localhost:4000/deletecontacts/${id}`);
-                             getContacts();
+                             const res = await axios.get("http://localhost:4000/viewallcontacts");
+                             setContacts(res.data);
                            }
                          };
     return(

@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import "./Addtocart.css";
 
 function ShippingForm() {
-// const user = JSON.parse(localStorage.getItem("user"));
-
-// console.log(user._id);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -146,57 +143,6 @@ const goToShipping = async () => {
 }
 
 export default ShippingForm;
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-// import Header from "./Header";
-// import { useNavigate } from "react-router-dom";
-// import "./ShippingForm.css";
-
-// function ShippingForm() {
-
-//   const navigate = useNavigate();
-//   const [product, setProduct] = useState(null);
-
-//   // ✅ GET PRODUCT FROM LOCALSTORAGE (BEST METHOD)
-//   useEffect(() => {
-//     const item = JSON.parse(localStorage.getItem("buyNowItem"));
-//     setProduct(item);
-//   }, []);
-
-//   // ✅ CREATE ORDER
-//   const goToShipping = async () => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-
-//     if (!user) {
-//       alert("Please login");
-//       return;
-//     }
-
-//     try {
-//       const totalAmount = product.price * product.quantity;
-
-//       const res = await axios.post(
-//         "http://localhost:4000/api/order/create",
-//         {
-//           userId: user._id,
-//           product: product,   // ✅ send full product
-//           totalAmount: totalAmount
-//         }
-//       );
-
-//       // ✅ SAVE ORDER ID
-//       localStorage.setItem("orderId", res.data.orderId);
-
-//       // ✅ GO TO ADDRESS PAGE
-//       navigate("/address");
-
-//     } catch (error) {
-//       console.log("Create Order Error:", error);
-//       alert("Order Create Failed");
-//     }
-//   };
-
-//   if (!product) return <h2>Loading...</h2>;
 
 //   return (
 //     <>

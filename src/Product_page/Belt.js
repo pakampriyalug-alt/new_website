@@ -2,22 +2,23 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Categorybar from "./Categorybar";
 
 
 
 function Belt() {
-    const [products, setProducts] = useState([]);
-    const getProducts = async () => {
-      const res = await axios.get("http://localhost:4000/viewproduct");
-      setProducts(res.data);
-    };
-  
-    useEffect(() => {
-      getProducts();
-    }, []);
+  const [products, setProducts] = useState([]);
+
+  const getProducts = useCallback(async () => {
+    const res = await axios.get("http://localhost:4000/viewproduct");
+    setProducts(res.data);
+  }, []);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
   return (
     <>
       <Header />
@@ -72,22 +73,22 @@ function Belt() {
   <div className="footer-section">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="h">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="products">Products</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="login">Login</a></li>
     </ul>
   </div>
 
   <div className="footer-section">
     <h3>Customer Service</h3>
     <ul>
-      <li><a href="#">Help & Support</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Return Policy</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="help">Help & Support</a></li>
+      <li><a href="shipping">Shipping Info</a></li>
+      <li><a href="returns">Return Policy</a></li>
+      <li><a href="privacy">Privacy Policy</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
     </ul>
   </div>
 

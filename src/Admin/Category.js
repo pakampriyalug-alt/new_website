@@ -20,16 +20,15 @@ function Category() {
 
   const subCategoryOptions = { Women: ["Saree", "Kurti", "Tops"], Men: ["Shirt", "Tshirt", "Jeans"], kids: ["Frock", "Shorts"], Accessories: ["Watch", "Belt", "Bag"], Footware: ["Shoes", "Sandals", "Slippers"] };
 
-  const getCategories = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/viewuser");
-      setCategories(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/viewuser");
+        setCategories(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getCategories();
   }, []);
 
@@ -51,7 +50,8 @@ function Category() {
       alert("Category Added");
       clearForm();
       setShowForm(false);
-      getCategories();
+      const updatedRes = await axios.get("http://localhost:4000/viewuser");
+      setCategories(updatedRes.data);
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +84,8 @@ function Category() {
       clearForm();
       setShowForm(false);
       setIsEdit(false);
-      getCategories();
+      const updatedRes = await axios.get("http://localhost:4000/viewuser");
+      setCategories(updatedRes.data);
     } catch (err) {
       console.log(err);
     }
@@ -93,7 +94,8 @@ function Category() {
   const deleteCategory = async (id) => {
     if (window.confirm("Are you sure?")) {
       await axios.delete(`http://localhost:4000/deleteuser/${id}`);
-      getCategories();
+      const updatedRes = await axios.get("http://localhost:4000/viewuser");
+      setCategories(updatedRes.data);
     }
   };
 

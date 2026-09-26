@@ -2,7 +2,7 @@ import Header from "./Header";
 import "./Homepage.css";
 import "./Saree.css";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -17,61 +17,43 @@ function Allproduct({ getwishlistcount }) {
   const [category, setCategory] = useState("All");
   const [subCategory, setSubCategory] = useState("");
 
-//   useEffect(() => {
-//   const fetchWishlist = async () => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-//     if (!user) return;
+  const fetchWishlist = useCallback(async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
-//     const res = await axios.get(`http://localhost:4000/getwishlist/${user._id}`);
+    if (!user) return;
 
-//     const ids = res.data.map(item => item.productId);
-//     setWishlistIds(ids);
-//   };
-
-//   fetchWishlist();
-// }, []);
-
-
-useEffect(() => {
-  fetchWishlist();
-}, []);
-
-const fetchWishlist = async () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user) return;
-
-  try {
-    const res = await axios.get("http://localhost:4000/getwishlist", {
-      params: { userId: user._id }
-    });
-
-const ids = res.data.map(item => item.productId._id.toString());
-setWishlistIds(ids);
-
-  } catch (err) {
-    console.log("Fetch wishlist error:", err);
-  }
-};
-   const getProducts = async () => {
     try {
+      const res = await axios.get("http://localhost:4000/getwishlist", {
+        params: { userId: user._id },
+      });
 
+      const ids = res.data.map((item) => item.productId._id.toString());
+      setWishlistIds(ids);
+    } catch (err) {
+      console.log("Fetch wishlist error:", err);
+    }
+  }, []);
+
+  const getProducts = useCallback(async () => {
+    try {
       const adminProducts = await axios.get("http://localhost:4000/viewproduct");
       const sellerProducts = await axios.get("http://localhost:4000/sellerallproduct");
 
       const mergedProducts = [...adminProducts.data, ...sellerProducts.data];
-        console.log("adminproduct",adminProducts.data);
       setProducts(mergedProducts);
       setFilteredProducts(mergedProducts);
-
     } catch (err) {
       console.log("Product fetch error", err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchWishlist();
+  }, [fetchWishlist]);
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   const filterByCategory = (cat) => {
     setCategory(cat);

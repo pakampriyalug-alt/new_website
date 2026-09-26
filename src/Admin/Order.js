@@ -13,20 +13,18 @@ function Order() {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:4000/api/order/admin/all"
+        );
+        setOrders(res.data.orders);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchOrders();
   }, []);
-
-
-  const fetchOrders = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:4000/api/order/admin/all"
-      );
-      setOrders(res.data.orders);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const clearForm = () => {
     setStatus("");
@@ -58,7 +56,10 @@ const handleUpdateStatus = async () => {
       }
     );
 
-    fetchOrders();
+    const res = await axios.get(
+      "http://localhost:4000/api/order/admin/all"
+    );
+    setOrders(res.data.orders);
     handleCancel();
 
   } catch (error) {

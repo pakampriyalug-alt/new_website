@@ -4,7 +4,7 @@ import "./Saree.css";
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 function Shopnow(){
     const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -12,13 +12,16 @@ function Shopnow(){
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/getaddtocart")
-      .then((res) => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/getaddtocart");
         const found = res.data.find((p) => p._id === id);
         setProduct(found);
-      })
-      .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchProduct();
   }, [id]);
    const addToCart = async () => {
  

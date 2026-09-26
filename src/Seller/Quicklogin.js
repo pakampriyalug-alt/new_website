@@ -7,17 +7,7 @@ import img from "./photo1.avif";
 import Header from "./Header";
 function Quicklogin() {
 
-const divstyle = {
-          backgroundImage: `url(${img})`,
-          backgroundSize: "cover",
-          width: "350px",
-    
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          height:"400px",
-  
-      };
-      const divstyle1 = {
+const divstyle1 = {
           backgroundImage: `url(${img})`,
           backgroundSize: "cover",
           width: "100%",

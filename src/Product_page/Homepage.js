@@ -1,7 +1,7 @@
 import "./Homepage.css";
-import Header from "./Header";
+
 import { useState,useEffect } from "react";
-import banner2 from "./banner2.webp";
+
 import { useNavigate } from "react-router-dom";
 import bannerimg from "./sareebanner.avif";
 import bannerimg2 from "./imgbanner7.jpg";
@@ -13,7 +13,7 @@ import axios from "axios";
 
 import img from "./girl.jfif";
 import "./Header.css";
-import img9 from "./6c3c5fe2-c236-4fa2-8d97-595e1e01da01.webp";
+
 import { Link } from "react-router-dom";
 function Homepage(){
   const navigate=useNavigate();
@@ -92,7 +92,7 @@ useEffect(() => {
   getwishlistcount();
 }, []);
   const [data, setData] = useState([]);
-  const [openCategory, setOpenCategory] = useState(null);
+  // const [openCategory, setOpenCategory] = useState(null);
 
   useEffect(() => {
     axios
@@ -372,7 +372,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="category-card" key={p._id}>
                 <Link to="/category/women">
-              <img src={`http://localhost:4000/uploads/${p.image}`} /></Link>
+              <img src={`http://localhost:4000/uploads/${p.image}`}  alt="img"/></Link>
 
               
 
@@ -386,7 +386,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="category-card" key={p._id}>
                  <Link to="/category/kids">
-              <img src={`http://localhost:4000/uploads/${p.image}`}  /></Link>
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" /></Link>
               
               
 
@@ -400,7 +400,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="category-card" key={p._id}>
                  <Link to="/category/shoes">
-              <img src={`http://localhost:4000/uploads/${p.image}`}/></Link>
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img"/></Link>
                
               
 
@@ -428,7 +428,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="category-card" key={p._id} >
                 <Link to="/category/men">
-              <img src={`http://localhost:4000/uploads/${p.image}`} /></Link>
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img"/></Link>
 
               
 
@@ -442,7 +442,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="category-card" key={p._id} >
                  
-              <img src={`http://localhost:4000/uploads/${p.image}`}  />
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" />
               
               
 
@@ -471,8 +471,8 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="boxcon" key={p._id}>
                
-              <img src={`http://localhost:4000/uploads/${p.image}`}  />
-               <h6 style={{textAlign:"center"}}></h6>
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" />
+               {/* <h6 style={{textAlign:"center"}}></h6> */}
               
 
              
@@ -492,7 +492,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="boxcon" key={p._id}>
                 
-              <img src={`http://localhost:4000/uploads/${p.image}`} />
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" />
                
               
 
@@ -512,7 +512,7 @@ const sellerId = loginseller?._id;
              .map(p => (
                 <div className="boxcon" key={p._id}>
                 
-              <img src={`http://localhost:4000/uploads/${p.image}`} />
+              <img src={`http://localhost:4000/uploads/${p.image}`} alt="img" />
                
               
 
@@ -540,25 +540,25 @@ const sellerId = loginseller?._id;
     </p>
   </div>
 
-  <div className="footer-section">
+   <div className="footer-section">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="home">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="product">Products</a></li>
+      <li><a href="contc">Contact</a></li>
+      <li><a href="login">Login</a></li>
     </ul>
   </div>
 
   <div className="footer-section">
     <h3>Customer Service</h3>
     <ul>
-      <li><a href="#">Help & Support</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Return Policy</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="help">Help & Support</a></li>
+      <li><a href="shipping">Shipping Info</a></li>
+      <li><a href="reurn">Return Policy</a></li>
+      <li><a href="privacy">Privacy Policy</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
     </ul>
   </div>
 

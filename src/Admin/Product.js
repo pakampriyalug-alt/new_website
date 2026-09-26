@@ -169,12 +169,11 @@ function Product() {
   const [editId, setEditId] = useState(null);
   const subCategoryOptions = { Women: ["Saree", "Kurti", "Tops"], Men: ["Shirt", "Tshirt", "Jeans"], kids: ["Frock", "Shorts"], Accessories: ["Watch", "Belt", "Bag"], Footware: ["Shoes", "Sandals", "Slippers"] };
 
-  const getProducts = async () => {
-    const res = await axios.get("http://localhost:4000/viewproduct");
-    setProducts(res.data);
-  };
-
   useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get("http://localhost:4000/viewproduct");
+      setProducts(res.data);
+    };
     getProducts();
   }, []);
 
@@ -212,7 +211,8 @@ function Product() {
     await axios.post("http://localhost:4000/addproduct", formData);
     clearForm();
     setShowForm(false);
-    getProducts();
+    const updatedRes = await axios.get("http://localhost:4000/viewproduct");
+    setProducts(updatedRes.data);
   };
 
   const handleEdit = (item) => {
@@ -255,12 +255,14 @@ function Product() {
     clearForm();
     setShowForm(false);
     setIsEdit(false);
-    getProducts();
+    const updatedRes = await axios.get("http://localhost:4000/viewproduct");
+    setProducts(updatedRes.data);
   };
 
   const deleteProduct = async (id) => {
     await axios.delete(`http://localhost:4000/deleteproduct/${id}`);
-    getProducts();
+    const updatedRes = await axios.get("http://localhost:4000/viewproduct");
+    setProducts(updatedRes.data);
   };
    const handleCancel = () => {
     clearForm();
@@ -395,7 +397,7 @@ function Product() {
             <tbody>
               {products.map(p => (
                 <tr key={p._id}>
-                  <td><img src={`http://localhost:4000/uploads/${p.image}`} width="40" /></td>
+                  <td><img src={`http://localhost:4000/uploads/${p.image}`} width="40"  alt="img"/></td>
                   <td>{p.Productid}</td>
                   <td className="productname">{p.Product}</td>
                   <td >{p.Category}</td>

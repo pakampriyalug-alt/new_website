@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import img from "./photo1.avif";
 
@@ -9,17 +9,7 @@ import Header from "./Header";
 function Quicksignup() {
 
 
-const divstyle = {
-          backgroundImage: `url(${img})`,
-          backgroundSize: "cover",
-          width: "350px",
-    
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          height:"400px",
-  
-      };
-      const divstyle1 = {
+const divstyle1 = {
           backgroundImage: `url(${img})`,
           backgroundSize: "cover",
           width: "100%",
@@ -29,7 +19,7 @@ const divstyle = {
           height:"700px",
   
       };
-  const navigate = useNavigate();
+ 
  
   // const [formData, setFormData] = useState({
   //   name: "",
